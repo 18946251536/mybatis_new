@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Test">
-    <select id="selectAll" resultType="com.xzit.model.teacher">
+<mapper namespace="com.xzit.Test">
+    <select id="selectAll" resultType="com.xzit.model.Teacher">
         select * from teacher
     </select>
 </mapper>
