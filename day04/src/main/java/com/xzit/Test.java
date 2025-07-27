@@ -11,9 +11,9 @@ public class Test {
         TeacherMapper mapper = session.getMapper(TeacherMapper.class);
 //        TeacherService.insertTeacher(mapper);
 //        TeacherService.selectTeacher(mapper);
-//        System.out.println(TeacherService.avgSal(mapper));
+        System.out.println(TeacherService.avgSal(mapper));
 //        TeacherService.updateTeacher(mapper);
-        TeacherService.deleteTeacher(mapper);
+//        TeacherService.deleteTeacher(mapper);
         session.close();
     }
 }

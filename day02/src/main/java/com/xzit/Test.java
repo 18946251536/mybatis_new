@@ -16,5 +16,6 @@ public class Test {
 //        System.out.println(TeacherService.avgSal(session));
 //        TeacherService.updateTeacher(session);
         TeacherService.deleteTeacher(session);
+        session.commit();
     }
 }
