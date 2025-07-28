@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzit.mapper.TeacherMapper">
+    <insert id="insert">
+        insert into Teacher values
+        <foreach collection="list" item="teacher" separator=",">
+            (default,#{teacher.name},#{teacher.addr},#{teacher.age},#{teacher.job},#{teacher.sal})
+        </foreach>
+    </insert>
+
+    <sql id="address">
+        <where>
+            <if test="city!=null and city!=''">
+                and addr like #{condition}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByCity" parameterType="String" resultType="teacher">
+        <bind name="condition" value="'%'+city"/>
+        select * from Teacher
+        <include refid="address"></include>
+    </select>
+
+    <select id="sumSalByCity" parameterType="String" resultType="int">
+        <bind name="condition" value="city+'%'"/>
+        select sum(sal) from Teacher
+        <include refid="address"></include>
+    </select>
+
+    <update id="update" parameterType="Teacher">
+        <bind name="address" value="'%'+addr"></bind>
+        update Teacher
+        <set>
+            <if test="sal!=null and sal!=0">sal=#{sal},</if>
+            <if test="job!=null and job!=''">job=#{job}</if>
+        </set>
+        <where>
+            <if test="addr!=null and addr!=''">
+                and addr like #{address}
+            </if>
+            <if test="name!=null and name!=''">
+                and name like#{name}
+            </if>
+        </where>
+    </update>
+
+    <delete id="delete">
+        delete from Teacher
+        <where>
+            <foreach collection="array" item="id" open="and id in(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+</mapper>
